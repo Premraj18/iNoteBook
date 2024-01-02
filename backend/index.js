@@ -4,8 +4,10 @@ const express = require('express')
 connectToMongo();
 const app = express();
 
-// Available Routes
+// Middleware
+app.use(express.json())
 
+// Available Routes
 app.use('/api/auth', require('./routes/Auth'))
 app.use('/api/note', require('./routes/Note'))
 
