@@ -6,24 +6,19 @@ const Addnote = () => {
     const { addNote } = context;
 
     const [note, setNote] = useState({
-        title: '',
-        description: '',
-        tag: ''
+        title: "",
+        description: "",
+        tag: "",
     })
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addNote(note.title, note.description, note.tag);
+        await addNote(note.title, note.description, note.tag);
         setNote({
             title: '',
             description: '',
             tag: ''
         })
-
-    }
-
-    const onchange = (e) => {
-        setNote({ ...note, [e.target.name]: e.target.value })
     }
 
     return (
@@ -32,16 +27,25 @@ const Addnote = () => {
             <form className='my-4' onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="title" name="title" aria-describedby="titleHelp" onChange={onchange} />
+                    <input type="text" className="form-control" id="title" name="etitle" aria-describedby="titleHelp"
+                        value={note.title}
+                        onChange={(e) => setNote({ ...note, title: e.target.value })}
+                    />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Description</label>
-                    <input type="text" className="form-control" id="description" name="description" onChange={onchange} />
+                    <input type="text" className="form-control" id="description" name="edescription"
+                        value={note.description}
+                        onChange={(e) => setNote({ ...note, description: e.target.value })}
+                    />
                 </div>
-                {/* <div className="mb-3 form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                    <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                </div> */}
+                <div className="mb-3">
+                    <label htmlFor="tag" className="form-label">Tag</label>
+                    <input type="text" className="form-control" id="tag" name="etag"
+                        value={note.tag}
+                        onChange={(e) => setNote({ ...note, tag: e.target.value })}
+                    />
+                </div>
                 <button type="submit" className="btn btn-primary">Add Note</button>
             </form>
         </div>
