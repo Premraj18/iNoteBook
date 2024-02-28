@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon backend/index.js",
+    "dev": "vite",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "start": "node backend/index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "preview": "vite preview",
+    "both": "concurrently \"npm run dev\" \"nodemon backend/index.js\""
   },
   "dependencies": {
     "concurrently": "^8.2.2",
