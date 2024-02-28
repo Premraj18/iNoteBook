@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     useEffect(() => {
         // console.log(location.pathname)
     }, [location])
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('token2');
+        navigate('/login')
+    }
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light navbarStyle">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">iNoteBook</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +30,17 @@ const Navbar = () => {
                         </li>
 
                     </ul>
-                    <form className="d-flex gap-3">
-                        <Link className="btn btn-outline-primary" to='/signup' role="button">SignUp</Link>
-                        <Link className="btn btn-outline-primary" to='/login' role="button">Login</Link>
-                    </form>
+                    {
+                        !localStorage.getItem('token') ?
+                            <form className="d-flex gap-3">
+                                <Link className="btn btn-outline-primary" to='/signup' role="button">SignUp</Link>
+                                <Link className="btn btn-outline-primary" to='/login' role="button">Login</Link>
+                            </form> :
+                            <div style={{display:'flex', alignItems: 'center', justifyContent: 'center', gap:'20px'}}>
+                                <p className='mt-2'>{localStorage.getItem('token2')}</p>
+                                <button onClick={handleLogout} className="btn btn-outline-primary" role="button">Logout</button>
+                            </div>
+                    }
                 </div>
             </div>
         </nav>

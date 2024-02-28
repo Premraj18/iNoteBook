@@ -1,13 +1,20 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import NoteContext from '../context/notes/NoteContext';
 import NoteItem from './NoteItem';
+import { useNavigate } from 'react-router-dom';
 
 const Notes = () => {
+    const navigate = useNavigate();
     const context = useContext(NoteContext);
     const { notes, fetchAllNote, editNote } = context;
 
     useEffect(() => {
-        fetchAllNote();
+        if (localStorage.getItem('token')) {
+            fetchAllNote();
+        }
+        else {
+            navigate('/login')
+        }
     }, [])
 
     const ref = useRef(null);
@@ -22,7 +29,7 @@ const Notes = () => {
 
     const updateNote = (currentNote) => {
         ref.current.click();
-        setNote({...currentNote,id: currentNote._id})
+        setNote({ ...currentNote, id: currentNote._id })
         // console.log(note)
     }
 
@@ -63,7 +70,7 @@ const Notes = () => {
                                     />
                                 </div>
                                 <div className="mb-3">
-                                <label htmlFor="tag" className="form-label">Tag</label>
+                                    <label htmlFor="tag" className="form-label">Tag</label>
                                     <input type="text" className="form-control" id="tag" name="tag"
                                         value={note.tag}
                                         onChange={(e) => setNote({ ...note, tag: e.target.value })}
@@ -78,17 +85,19 @@ const Notes = () => {
                     </div>
                 </div>
             </div>
-            <h2 className='mt-3 mb-4'>Yours Notes</h2>
-            <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', flexWrap: 'wrap',margin: '40px 0' }}>
-                {notes.length === 0 && 'No notes to display'}
-                {
-                    
-                    notes.map((note) => (
-                        <div key={note._id}>
-                            <NoteItem note={note} updateNote={updateNote} />
-                        </div>
-                    ))
-                }
+            <div className='notesBox'>
+                <h2 className='yoursNotes'>Yours Notes</h2>
+                <div className='notesShown'>
+                    {notes.length === 0 && 'No notes to display'}
+                    {
+
+                        notes.map((note) => (
+                            <div key={note._id}>
+                                <NoteItem note={note} updateNote={updateNote} />
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )

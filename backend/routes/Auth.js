@@ -74,7 +74,7 @@ router.post('/login', [
     try {
         const user = await User.findOne({ email })
         if (!user) {
-            success = false;
+            // success = false;
             return res.status(400).json({ error: "Please try to login with valid credentials" })
         }
 
@@ -89,9 +89,9 @@ router.post('/login', [
                 id: user.id
             }
         }
-        const authtoken = jwt.sign(data, process.env.JWT_SECRET);
+        const authtoken = jwt.sign(data, process.env.JWT_SECRET)
         success = true;
-        res.json({ success,authtoken });
+        res.json({ success,authtoken,email });
 
     } catch (error) {
         console.error(error.message)

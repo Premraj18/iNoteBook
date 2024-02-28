@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
+const SignUp = (props) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -25,15 +25,19 @@ const SignUp = () => {
 
             // redirect
             localStorage.setItem('token', data.authtoken)
+            props.showAlert('Account Created successfully', 'success')
             navigate('/login')
         }
         catch (error) {
-            alert(error.message)
+            // alert(error.message)
+            props.showAlert(error.message, 'danger')
         }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+        <h4 className='signupText'>Sign Up</h4>
+        <form onSubmit={handleSubmit} className='signup'>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label">Name</label>
                 <input type="text" className="form-control" id="name" name='name' aria-describedby="nameHelp"
@@ -60,6 +64,7 @@ const SignUp = () => {
             </div>
             <button type="submit" className="btn btn-primary">Sign Up</button>
         </form>
+        </div>
     )
 }
 

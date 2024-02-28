@@ -22,9 +22,9 @@ const Addnote = () => {
     }
 
     return (
-        <div>
-            <h2 className='mt-3'>Add a Note</h2>
-            <form className='my-4' onSubmit={handleSubmit}>
+        <div className='noteBox'>
+            <h2 className=''>Add a Note</h2>
+            <form className='my-4 addNoteForm' onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
                     <input type="text" className="form-control" id="title" name="etitle" aria-describedby="titleHelp"
@@ -46,7 +46,7 @@ const Addnote = () => {
                         onChange={(e) => setNote({ ...note, tag: e.target.value })}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Add Note</button>
+                <button type="submit" className="btn addNoteBtn">Add Note</button>
             </form>
         </div>
     )

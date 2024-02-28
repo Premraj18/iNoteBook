@@ -4,7 +4,7 @@ import Addnote from './Addnote';
 
 const Home = () => {
   return (
-    <div style={{padding: '0 20px'}}>
+    <div className='wholeBody'>
       <Addnote/>
       <Notes/>
     </div>
