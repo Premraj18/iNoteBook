@@ -3,6 +3,8 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 
+__dirname = path.resolve();
+
 connectToMongo();
 const app = express();
 
