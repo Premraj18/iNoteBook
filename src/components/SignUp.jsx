@@ -36,7 +36,7 @@ const SignUp = (props) => {
 
     return (
         <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-        <h4 className='signupText'>Sign Up</h4>
+        <h4 className='signupText'>Create an account to use iNoteBook</h4>
         <form onSubmit={handleSubmit} className='signup'>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label">Name</label>

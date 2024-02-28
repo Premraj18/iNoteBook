@@ -33,7 +33,7 @@ const Login = (props) => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <h4 className='loginText'>Sign In</h4>
+            <h4 className='loginText'>Login to continue to iNoteBook</h4>
             <form onSubmit={handleSubmit} className='login'>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
