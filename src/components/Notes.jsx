@@ -79,8 +79,10 @@ const Notes = () => {
                 </div>
             </div>
             <h2 className='mt-3 mb-4'>Yours Notes</h2>
-            <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', flexWrap: 'wrap',margin: '40px 0' }}>
+                {notes.length === 0 && 'No notes to display'}
                 {
+                    
                     notes.map((note) => (
                         <div key={note._id}>
                             <NoteItem note={note} updateNote={updateNote} />

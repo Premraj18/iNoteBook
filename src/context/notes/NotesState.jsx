@@ -33,6 +33,12 @@ const NoteState = (props) => {
         if (title === "" || description === "") {
             alert("Please fill all the credentials")
         }
+        else if(description.length < 5){
+            alert('Description must be atleast 5 character')
+        }
+        else if(title.length < 3){
+            alert('Title must be atleast 3 character')
+        }
         else {
 
             try {

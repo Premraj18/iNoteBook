@@ -20,6 +20,7 @@ router.post('/CreateUser', [
         return res.status(400).json({ errors: errors.array() });
     }
 
+    let success;
     // Check whether the user with this email exits already
     try {
 
@@ -68,15 +69,18 @@ router.post('/login', [
         return res.status(400).json({ errors: errors.array() });
     }
 
+    let success = false;
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email })
         if (!user) {
+            success = false;
             return res.status(400).json({ error: "Please try to login with valid credentials" })
         }
 
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
+            success = false;
             return res.status(400).json({ error: "Please try to login with valid credentials" })
         }
 
@@ -86,7 +90,8 @@ router.post('/login', [
             }
         }
         const authtoken = jwt.sign(data, process.env.JWT_SECRET);
-        res.json({ authtoken });
+        success = true;
+        res.json({ success,authtoken });
 
     } catch (error) {
         console.error(error.message)
